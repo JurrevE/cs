@@ -80,14 +80,58 @@ class LinkedList {
   constructor() {
     this.head = null;
   }
+
   append(value) {
+    let current;
     const newNode = new Node(value);
+
+    if (this.head === null) {
+      this.head = newNode;
+    } else {
+      current = this.head;
+
+      while (current.nextNode) {
+        current = current.nextNode;
+      }
+      current.nextNode = newNode;
+    }
+  }
+
+  prepend(value) {
+    this.head = new Node(value, this.head);
+  }
+
+  checkSize() {
+    let count = 0;
+    let current;
+
+    if (this.head === null) return count;
+    else {
+      current = this.head;
+
+      while (current.nextNode) {
+        current = current.nextNode;
+        count++;
+      }
+      return count;
+    }
+  }
+}
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.nextNode = null;
   }
 }
 
-class Node {
-  constructor(value, NextNode = null) {
-    this.value = value;
-    this.NextNode = null;
-  }
-}
+let ll = new LinkedList();
+ll.append(123);
+ll.append(12323);
+ll.append(123234);
+ll.append(12133);
+ll.append(12133);
+ll.append(12133);
+ll.append(12133);
+ll.append(12133);
+ll.append(12133);
+console.log(ll);
