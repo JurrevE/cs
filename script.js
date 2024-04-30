@@ -75,3 +75,19 @@ function merge(sortedLeft, sortedRight) {
 
 let array = [105, 79, 100, 110];
 console.log("Sorted array:", mergeSort(array)); // Log the sorted array only at the end
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+  append(value) {
+    const newNode = new Node(value);
+  }
+}
+
+class Node {
+  constructor(value, NextNode = null) {
+    this.value = value;
+    this.NextNode = null;
+  }
+}
