@@ -134,6 +134,66 @@ class LinkedList {
       return current;
     }
   }
+
+  at(index) {
+    let current = this.head;
+    let count = 0;
+
+    if (index === 0) return this.head;
+    else {
+      while (current !== null && count < index) {
+        current = current.nextNode;
+        count++;
+      }
+      return current;
+    }
+  }
+
+  pop() {
+    if (this.head === null) {
+      // If the list is empty, return null
+      return null;
+    } else if (this.head.nextNode === null) {
+      // If there's only one node in the list
+      let value = this.head.value;
+      this.head = null; // Set head to null
+      return value; // Return the value of the popped node
+    } else {
+      let current = this.head;
+      let previous = null;
+
+      // Traverse the list until reaching the last node
+      while (current.nextNode !== null) {
+        previous = current;
+        current = current.nextNode;
+      }
+
+      // Now, current points to the last node
+      // If previous is null, it means there was only one node in the list
+      if (previous === null) {
+        this.head = null; // Set head to null
+      } else {
+        // Set the nextNode of the previous node to null
+        previous.nextNode = null;
+      }
+
+      // Return the value of the popped node
+      return current.value;
+    }
+  }
+
+  contains(value) {
+    let current = this.head;
+
+    while (current) {
+      if (current.value === value) {
+        return true;
+      }
+      current = current.nextNode;
+    }
+
+    return false;
+  }
 }
 
 class Node {
