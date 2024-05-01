@@ -209,6 +209,27 @@ class LinkedList {
       return "value not found :(";
     }
   }
+  toString() {
+    let current = this.head;
+    let printString = "This is the string that will be printed: ";
+
+    if (!current) {
+      return "krijg kanker";
+    }
+
+    let result = printString;
+
+    while (current) {
+      if (current.value === null) {
+        result += "null ";
+      } else {
+        result += `${current.value} `;
+      }
+      current = current.nextNode;
+    }
+
+    return result;
+  }
 }
 
 class Node {
