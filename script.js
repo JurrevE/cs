@@ -194,6 +194,21 @@ class LinkedList {
 
     return false;
   }
+
+  find(value) {
+    let current = this.head;
+    let count = 0;
+
+    if (this.head.value == value) return count;
+    else {
+      while (current) {
+        if (current.value === value) return count;
+        current = current.nextNode;
+        count++;
+      }
+      return "value not found :(";
+    }
+  }
 }
 
 class Node {
@@ -204,10 +219,10 @@ class Node {
 }
 
 let ll = new LinkedList();
-ll.append(1212353);
-ll.append(153423);
-ll.append(121233);
-ll.append(112323);
-ll.append(123464323);
+ll.append(1);
+ll.append(2);
+ll.append(3);
+ll.append(4);
+ll.append(5);
 
 console.log(ll);
