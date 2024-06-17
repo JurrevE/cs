@@ -1,16 +1,65 @@
-function fibs(num) {
-  let result = 0;
+function sumRange(num) {
+  if (num == 1) {
+    return num;
+  } else {
+    return num + sumRange(num - 1);
+  }
+}
 
-  let fibstart = [0, 1];
+function power(base, exponent) {
+  if (exponent === 0) {
+    return 1;
+  } else {
+    return base * power(base, exponent - 1);
+  }
+}
 
-  for (let j = 2; j < num; j++) {
-    for (let i = 0; i < fibstart.length; i++) {
-      result += fibstart[i];
-      console.log(result);
-      fibstart.push(result);
-      fibstart.shift();
+function factorial(num) {
+  if (num == 1) return 1;
+  else return num * factorial(num - 1);
+}
+function productOfArray(array) {
+  if (array.length === 0) return 1;
+
+  return array.shift() * productOfArray(array);
+}
+let nestedObject = {
+  a: 1,
+  b: {
+    c: 2,
+    d: {
+      e: 3,
+      f: {
+        g: 4,
+      },
+    },
+  },
+};
+function contains(nestedObject, value) {
+  for (let key in nestedObject) {
+    if (nestedObject.hasOwnProperty(key)) {
+      if (nestedObject[key] === value) {
+        return true;
+      }
+      if (typeof nestedObject[key] === "object") {
+        if (contains(nestedObject[key], value)) {
+          return true;
+        }
+      }
     }
   }
+  return false;
+}
+
+function fibs(num) {
+  let fibSequence = [0, 1];
+
+  for (let i = 2; i < num; i++) {
+    let nextFib = fibSequence[i - 1] + fibSequence[i - 2];
+    fibSequence.push(nextFib);
+  }
+
+  return fibSequence;
 }
 
 function fibsRec(n) {
@@ -27,17 +76,15 @@ function fibsRec(n) {
 }
 function mergeSort(array) {
   if (array.length <= 1) {
-    return array; // Return the array when it's the base case
+    return array;
   } else {
     const middleIndex = Math.floor(array.length / 2);
     const leftArray = array.slice(0, middleIndex);
     const rightArray = array.slice(middleIndex);
 
-    // Recursively sort the left and right halves
     const sortedLeft = mergeSort(leftArray);
     const sortedRight = mergeSort(rightArray);
 
-    // Merge the sorted left and right halves
     return merge(sortedLeft, sortedRight);
   }
 }
@@ -47,7 +94,6 @@ function merge(sortedLeft, sortedRight) {
   let leftIndex = 0;
   let rightIndex = 0;
 
-  // Merge the sorted left and right arrays while maintaining the sorted order
   while (leftIndex < sortedLeft.length && rightIndex < sortedRight.length) {
     if (sortedLeft[leftIndex] < sortedRight[rightIndex]) {
       mergedArray.push(sortedLeft[leftIndex]);
@@ -58,13 +104,11 @@ function merge(sortedLeft, sortedRight) {
     }
   }
 
-  // Append remaining elements from sortedLeft (if any)
   while (leftIndex < sortedLeft.length) {
     mergedArray.push(sortedLeft[leftIndex]);
     leftIndex++;
   }
 
-  // Append remaining elements from sortedRight (if any)
   while (rightIndex < sortedRight.length) {
     mergedArray.push(sortedRight[rightIndex]);
     rightIndex++;
@@ -74,7 +118,7 @@ function merge(sortedLeft, sortedRight) {
 }
 
 let array = [105, 79, 100, 110];
-console.log("Sorted array:", mergeSort(array)); // Log the sorted array only at the end
+console.log("Sorted array:", mergeSort(array));
 
 class LinkedList {
   constructor() {
@@ -151,33 +195,26 @@ class LinkedList {
 
   pop() {
     if (this.head === null) {
-      // If the list is empty, return null
       return null;
     } else if (this.head.nextNode === null) {
-      // If there's only one node in the list
       let value = this.head.value;
-      this.head = null; // Set head to null
-      return value; // Return the value of the popped node
+      this.head = null;
+      return value;
     } else {
       let current = this.head;
       let previous = null;
 
-      // Traverse the list until reaching the last node
       while (current.nextNode !== null) {
         previous = current;
         current = current.nextNode;
       }
 
-      // Now, current points to the last node
-      // If previous is null, it means there was only one node in the list
       if (previous === null) {
-        this.head = null; // Set head to null
+        this.head = null;
       } else {
-        // Set the nextNode of the previous node to null
         previous.nextNode = null;
       }
 
-      // Return the value of the popped node
       return current.value;
     }
   }
@@ -214,7 +251,7 @@ class LinkedList {
     let printString = "This is the string that will be printed: ";
 
     if (!current) {
-      return "krijg kanker";
+      return "beep boop";
     }
 
     let result = printString;
@@ -247,3 +284,25 @@ ll.append(4);
 ll.append(5);
 
 console.log(ll);
+
+function stringToNumber(string) {
+  let hashCode = 0;
+  for (let i = 0; i < string.length; i++) {
+    const charCode = string.charCodeAt(i);
+    console.log(
+      `Iterating over letter '${string[i]}' with Unicode value ${charCode}`
+    );
+    hashCode += charCode;
+  }
+  return hashCode;
+}
+
+function hash(name, surname) {
+  return stringToNumber(name) + stringToNumber(surname);
+}
+
+const name = "John";
+const surname = "Doe";
+
+const combinedHash = hash(name, surname);
+console.log(`Combined hash code: ${combinedHash}`);
